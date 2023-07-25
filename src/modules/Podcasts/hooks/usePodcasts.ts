@@ -2,15 +2,18 @@ import { getAllPodcasts } from '@context/AppleItunes/application/getAllPodcasts'
 import { persistedPodcastStore } from '../store/persistedPodcastStore'
 import { podcastRepositoryStore } from '../store/podcastRepositoryStore'
 import { isNotOutdated } from '@modules/Shared/utils/isNotOutdated'
+import { podcastDetailStore } from '../store/podcastDetail'
+import { getPodcastById } from '@context/AppleItunes/application/getPodcastById'
 
 export const usePodcasts = () => {
   const { setPodcastsList } = persistedPodcastStore()
+  const { setPodcastDetail, setLoading } = podcastDetailStore()
   const { repository } = podcastRepositoryStore()
 
   const retrieveAllPodcasts = async ({ limit }: { limit: string }) => {
     let list
     if (
-      JSON.parse(localStorage.getItem('PersistedPodcastStore') ?? '') &&
+      localStorage.getItem('PersistedPodcastStore') !== null &&
       JSON.parse(localStorage.getItem('PersistedPodcastStore') ?? '').state.podcastsList.length > 0 &&
       isNotOutdated(JSON?.parse(localStorage.getItem('PersistedPodcastStore') ?? '').state.timeStamp)
     ) {
@@ -22,7 +25,37 @@ export const usePodcasts = () => {
     setPodcastsList(list)
   }
 
+  const getPodcastByIdHook = async (id: string) => {
+    setLoading(true)
+    try {
+      let detail
+      if (localStorage.getItem(id) && isNotOutdated(JSON.parse(localStorage.getItem(id) ?? '').timeStamp)) {
+        const persistedData = JSON.parse(localStorage.getItem(id) ?? '')
+        detail = {
+          ...persistedData,
+        }
+        setPodcastDetail(detail)
+      } else {
+        const { episodes, podcast } = await getPodcastById(repository, id)
+        detail = {
+          episodes: episodes,
+          podcast: podcast,
+          timeStamp: Date.now(),
+        }
+        try {
+          localStorage.setItem(id, JSON.stringify(detail))
+        } catch (e) {
+          localStorage.clear()
+        }
+        setPodcastDetail(detail)
+      }
+    } catch (error) {
+      console.log('🚀 ~ file: useItunes.ts:27 ~ getPodcastById ~ error:', error)
+    }
+  }
+
   return {
     retrieveAllPodcasts,
+    getPodcastByIdHook,
   }
 }

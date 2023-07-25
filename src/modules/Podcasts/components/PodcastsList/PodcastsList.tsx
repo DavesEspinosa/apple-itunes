@@ -1,5 +1,5 @@
 import { Chip, Grid, Stack, Typography } from '@mui/material'
-import { SearchInput } from '@modules/Shared/SearchInput/SearchInput'
+import { SearchInput } from '@modules/Shared/components/SearchInput/SearchInput'
 import { useEffect } from 'react'
 import { usePodcasts } from '@modules/Podcasts/hooks/usePodcasts'
 import { PodcastCard } from '../PodcastCard'

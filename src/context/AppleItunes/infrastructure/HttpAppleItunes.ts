@@ -8,6 +8,7 @@ const apiClient = ApiClient()
 export function HttpAppleItunes(): PodcastRepository {
   return {
     findAll,
+    findById,
   }
 }
 async function findAll({ limit }: { limit: string }) {
@@ -21,6 +22,20 @@ async function findAll({ limit }: { limit: string }) {
         author: entry['im:artist'].label,
         summary: entry['summary'].label ?? '-',
       }))
+    })
+    .catch((error: AxiosError) => {
+      throw new Error(error.message)
+    })
+}
+
+async function findById({ id }: { id: string }) {
+  return await apiClient
+    .get(`lookup?id=${id}&media=podcast&entity=podcastEpisode&limit=20`)
+    .then(({ data }) => {
+      return {
+        podcast: data.results[0],
+        episodes: data.results.slice(1),
+      }
     })
     .catch((error: AxiosError) => {
       throw new Error(error.message)
