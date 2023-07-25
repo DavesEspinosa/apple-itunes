@@ -1,37 +1,34 @@
-import { PodcastRepository } from '@context/AppleItunes/domain/PodcastRepository'
 import { Podcast } from '@context/AppleItunes/domain/Podcast'
-import { HttpAppleItunes } from '@context/AppleItunes/infrastructure/HttpAppleItunes'
 import { produce } from 'immer'
 import { create } from 'zustand'
-import { devtools, persist } from 'zustand/middleware'
-const repository = HttpAppleItunes()
 
-export type PodcastListInitialState = {
-  repository: PodcastRepository
+import { devtools, persist } from 'zustand/middleware'
+
+export type PersistedPodcastStoreInitialState = {
   podcastsList: Array<Podcast> | []
+  timeStamp: number
   filteredPodcastsList: Array<Podcast> | []
 }
 
-export type PodcastListStore = PodcastListInitialState & {
+export type PersistedPodcastStore = PersistedPodcastStoreInitialState & {
   setPodcastsList: (podcastsList: Array<Podcast>) => void
   setSearchPodcasts: (query: string | null) => void
 }
 
-const initialSettingStore: PodcastListInitialState = {
-  repository: repository,
+const initialSettingStore: PersistedPodcastStoreInitialState = {
   podcastsList: [],
   filteredPodcastsList: [],
+  timeStamp: Date.now(),
 }
 
-export const podcastListStore = create<PodcastListStore>()(
+export const persistedPodcastStore = create<PersistedPodcastStore>()(
   devtools(
     persist(
-      (set) => ({
+      (set, get) => ({
         ...initialSettingStore,
-
         setPodcastsList: (podcastsList) =>
           set(
-            produce((draft: PodcastListStore) => {
+            produce((draft: PersistedPodcastStore) => {
               draft.podcastsList = podcastsList
               draft.filteredPodcastsList = podcastsList
             }),
@@ -41,7 +38,7 @@ export const podcastListStore = create<PodcastListStore>()(
 
         setSearchPodcasts: (query) =>
           set(
-            produce((draft: PodcastListStore) => {
+            produce((draft: PersistedPodcastStore) => {
               let filtered: Array<Podcast> | []
               if (query) {
                 filtered = draft.podcastsList?.filter(
@@ -59,7 +56,7 @@ export const podcastListStore = create<PodcastListStore>()(
           ),
       }),
       {
-        name: 'PodcastListStore',
+        name: 'PersistedPodcastStore',
       },
     ),
   ),
