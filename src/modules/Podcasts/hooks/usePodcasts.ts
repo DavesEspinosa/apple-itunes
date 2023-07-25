@@ -15,7 +15,7 @@ export const usePodcasts = () => {
     if (
       localStorage.getItem('PersistedPodcastStore') !== null &&
       JSON.parse(localStorage.getItem('PersistedPodcastStore') ?? '').state.podcastsList.length > 0 &&
-      isNotOutdated(JSON?.parse(localStorage.getItem('PersistedPodcastStore') ?? '').state.timeStamp)
+      isNotOutdated(JSON?.parse(localStorage.getItem('PersistedPodcastStore') ?? '').state.timestamp)
     ) {
       const persistedData = JSON.parse(localStorage.getItem('PersistedPodcastStore') ?? '')
       list = persistedData.state.podcastsList
@@ -29,18 +29,20 @@ export const usePodcasts = () => {
     setLoading(true)
     try {
       let detail
-      if (localStorage.getItem(id) && isNotOutdated(JSON.parse(localStorage.getItem(id) ?? '').timeStamp)) {
+      if (localStorage.getItem(id) && isNotOutdated(JSON.parse(localStorage.getItem(id) ?? '').timestamp)) {
         const persistedData = JSON.parse(localStorage.getItem(id) ?? '')
         detail = {
           ...persistedData,
         }
         setPodcastDetail(detail)
       } else {
-        const { episodes, podcast } = await getPodcastById(repository, id)
+        const { episodes, podcast, timestamp, episodesLength, description } = await getPodcastById(repository, id)
         detail = {
           episodes: episodes,
           podcast: podcast,
-          timeStamp: Date.now(),
+          timestamp: timestamp,
+          episodesLength: episodesLength,
+          description: description,
         }
         try {
           localStorage.setItem(id, JSON.stringify(detail))

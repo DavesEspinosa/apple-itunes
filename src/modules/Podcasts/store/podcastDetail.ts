@@ -1,14 +1,15 @@
+import { PodcastById } from '@context/AppleItunes/domain/PodcastById'
 import { produce } from 'immer'
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 
 export type PodcastDetailInitialState = {
-  podcastDetail: any
+  podcastDetail: PodcastById | null
   isLoading: boolean
 }
 
 export type PodcastDetailStore = PodcastDetailInitialState & {
-  setPodcastDetail: (podcast: any) => void
+  setPodcastDetail: (podcast: PodcastById) => void
   setLoading: (value: boolean) => void
 }
 

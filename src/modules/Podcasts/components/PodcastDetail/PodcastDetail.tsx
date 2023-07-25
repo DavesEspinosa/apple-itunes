@@ -3,7 +3,7 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
-import {  Divider, Stack } from '@mui/material'
+import { Divider, Stack } from '@mui/material'
 import { useRouter } from 'next/router'
 import { podcastDetailStore } from '@modules/Podcasts/store/podcastDetail'
 
@@ -34,6 +34,10 @@ export const PodcastDetail = ({ isFromEpisode }: { isFromEpisode?: boolean }) =>
             <Typography fontStyle={'oblique'} variant="body2" color="text.secondary">
               {`by ${podcastDetail.podcast.artistName}`}
             </Typography>
+            <div
+              style={{ height: 265, margin: 10, overflowWrap: 'break-word', overflow: 'auto' }}
+              dangerouslySetInnerHTML={{ __html: podcastDetail.description }}
+            ></div>
           </Stack>
         </CardContent>
       </Card>

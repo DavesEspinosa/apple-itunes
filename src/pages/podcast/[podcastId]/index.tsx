@@ -6,6 +6,8 @@ import { DefaultLayout } from '@modules/Shared/components/Layouts'
 import { PodcastDetail } from '@modules/Podcasts/components/PodcastDetail/PodcastDetail'
 import { podcastDetailStore } from '@modules/Podcasts/store/podcastDetail'
 import { usePodcasts } from '@modules/Podcasts/hooks/usePodcasts'
+import { PodcastEpisodesCount } from '@modules/Podcasts/components/PodcastEpisodesCount'
+import { PodcastEpisodesTable } from '@modules/Podcasts/components/PodcastEpisodesTable'
 
 export default function PodcastById() {
   const { isLoading } = podcastDetailStore()
@@ -34,7 +36,10 @@ export default function PodcastById() {
       <Grid item md={4}>
         <PodcastDetail />
       </Grid>
-      <Grid item md={8}></Grid>
+      <Grid item md={8}>
+        <PodcastEpisodesCount />
+        <PodcastEpisodesTable />
+      </Grid>
     </Grid>
   )
 }

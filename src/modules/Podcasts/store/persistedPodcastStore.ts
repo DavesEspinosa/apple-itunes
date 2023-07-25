@@ -6,7 +6,7 @@ import { devtools, persist } from 'zustand/middleware'
 
 export type PersistedPodcastStoreInitialState = {
   podcastsList: Array<Podcast> | []
-  timeStamp: number
+  timestamp: number
   filteredPodcastsList: Array<Podcast> | []
 }
 
@@ -18,7 +18,7 @@ export type PersistedPodcastStore = PersistedPodcastStoreInitialState & {
 const initialSettingStore: PersistedPodcastStoreInitialState = {
   podcastsList: [],
   filteredPodcastsList: [],
-  timeStamp: Date.now(),
+  timestamp: Date.now(),
 }
 
 export const persistedPodcastStore = create<PersistedPodcastStore>()(
