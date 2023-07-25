@@ -1,4 +1,4 @@
-import { Header } from '@modules/components/Header'
+import { Header } from '@modules/Podcasts/components/Header'
 import { Grid, Stack, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 import { ReactElement } from 'react'

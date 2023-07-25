@@ -13,7 +13,7 @@
     "strict": true,
     "strictNullChecks": true,
     "pretty": true,
-    "forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": false,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
