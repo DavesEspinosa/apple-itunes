@@ -38,7 +38,7 @@ export const PodcastEpisodesTable = () => {
       label: 'Duration',
       minWidth: 170,
       align: 'right',
-      format: (value: number) => DateTime.fromMillis(value ?? '').toFormat('mm:ss'),
+      format: (value: number) => DateTime.fromMillis(value ?? 0).toFormat('mm:ss'),
     },
   ]
   return (
