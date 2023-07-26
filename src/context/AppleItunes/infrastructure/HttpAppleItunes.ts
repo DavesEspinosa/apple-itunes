@@ -55,13 +55,13 @@ async function findPodcastDescriptionAndEpisodesLength({ url }: { url: string })
     const feed = await parser.parseURL(url)
     const episodesData: PodcastDetailFeedUrl = {
       description: feed.description ?? '',
-      episodesLength: feed.items.length ?? '',
+      episodesLength: feed.items.length ?? 0,
     }
     return episodesData
   } catch (error) {
     return await axios(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`)
       .then(({ data }) => {
-        let detail: unknown
+        let detail: PodcastDetailFeedUrl = { description: '', episodesLength: 0 }
         parseString(data.contents, function (___, result: any) {
           detail = {
             description: result.rss?.channel[0]['description'][0],
