@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import { Divider, Stack } from '@mui/material'
 import { useRouter } from 'next/router'
-import { podcastDetailStore } from '../../store/podcastDetail'
+import { podcastDetailStore } from '../../store/podcastDetailStore'
 
 export const PodcastDetail = ({ isFromEpisode }: { isFromEpisode?: boolean }) => {
   const { podcastDetail } = podcastDetailStore()

@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { DateTime } from 'luxon'
 import { useRouter } from 'next/router'
 import { ResponseEpisode } from 'src/context/AppleItunes/domain/ResponseApiPodcastById'
-import { podcastDetailStore } from '../../store/podcastDetail'
+import { podcastDetailStore } from '../../store/podcastDetailStore'
 
 interface Column {
   id: 'trackName' | 'releaseDate' | 'trackTimeMillis'

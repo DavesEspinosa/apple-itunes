@@ -3,10 +3,10 @@ import { useEffect } from 'react'
 import { PodcastCard } from '../PodcastCard'
 import { SearchInput } from 'src/modules/Shared/components/SearchInput'
 import { usePodcasts } from '../../hooks/usePodcasts'
-import { persistedPodcastStore } from '../../store/persistedPodcastStore'
+import { podcastListStore } from '../../store/podcastListStore'
 
 export const PodcastsList = () => {
-  const { setSearchPodcasts, filteredPodcastsList } = persistedPodcastStore()
+  const { setSearchPodcasts, filteredPodcastsList } = podcastListStore()
   const { retrieveAllPodcasts } = usePodcasts()
 
   useEffect(() => {

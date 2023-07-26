@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography'
 import { Paper } from '@mui/material'
-import { podcastDetailStore } from '../../store/podcastDetail'
+import { podcastDetailStore } from '../../store/podcastDetailStore'
 
 export const PodcastEpisodesCount = () => {
   const { podcastDetail } = podcastDetailStore()

@@ -1,43 +1,41 @@
-import { persistedPodcastStore } from '../store/persistedPodcastStore'
-import { podcastRepositoryStore } from '../store/podcastRepositoryStore'
-import { podcastDetailStore } from '../store/podcastDetail'
+import { podcastDetailStore } from '../store/podcastDetailStore'
 import { getAllPodcasts } from 'src/context/AppleItunes/application/getAllPodcasts'
 import { getPodcastById } from 'src/context/AppleItunes/application/getPodcastById'
 import { isNotOutdated } from 'src/modules/Shared/utils/isNotOutdated'
+import { podcastListStore } from '../store/podcastListStore'
 
 export const usePodcasts = () => {
-  const { setPodcastsList } = persistedPodcastStore()
+  const { setPodcastsList, repository } = podcastListStore()
   const { setPodcastDetail, setLoading } = podcastDetailStore()
-  const { repository } = podcastRepositoryStore()
 
   const retrieveAllPodcasts = async ({ limit }: { limit: string }) => {
-    let list
     if (
-      localStorage.getItem('PersistedPodcastStore') !== null &&
-      JSON.parse(localStorage.getItem('PersistedPodcastStore') ?? '').state.podcastsList.length > 0 &&
-      isNotOutdated(JSON?.parse(localStorage.getItem('PersistedPodcastStore') ?? '').state.timestamp)
+      localStorage.getItem('PodcastList') &&
+      isNotOutdated(JSON.parse(localStorage.getItem('PodcastList') ?? '').timestamp)
     ) {
-      const persistedData = JSON.parse(localStorage.getItem('PersistedPodcastStore') ?? '')
-      list = persistedData.state.podcastsList
+      const persistedData = JSON.parse(localStorage.getItem('PodcastList') ?? '')
+      setPodcastsList(persistedData)
     } else {
-      list = await getAllPodcasts(repository, limit)
+      const allPodcasts = await getAllPodcasts(repository, limit)
+      try {
+        localStorage.setItem('PodcastList', JSON.stringify(allPodcasts))
+      } catch (e) {
+        localStorage.clear()
+      }
+      setPodcastsList(allPodcasts)
     }
-    setPodcastsList(list)
   }
 
   const getPodcastByIdHook = async (id: string) => {
     setLoading(true)
     try {
-      let detail
       if (localStorage.getItem(id) && isNotOutdated(JSON.parse(localStorage.getItem(id) ?? '').timestamp)) {
         const persistedData = JSON.parse(localStorage.getItem(id) ?? '')
-        detail = {
-          ...persistedData,
-        }
-        setPodcastDetail(detail)
+
+        setPodcastDetail(persistedData)
       } else {
         const { episodes, podcast, timestamp, episodesLength, description } = await getPodcastById(repository, id)
-        detail = {
+        const detail = {
           episodes: episodes,
           podcast: podcast,
           timestamp: timestamp,

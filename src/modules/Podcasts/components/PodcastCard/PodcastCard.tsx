@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import { Stack } from '@mui/material'
 import { useRouter } from 'next/router'
-import { Podcast } from 'src/context/AppleItunes/domain/Podcast'
+import { Podcast } from 'src/context/AppleItunes/domain/PodcastSchema'
 
 export const PodcastCard = ({ podcast }: { podcast: Podcast }) => {
   const router = useRouter()

@@ -18,13 +18,16 @@ async function findAll({ limit }: { limit: string }) {
   return await apiClient
     .get(`/rss/toppodcasts/limit=${limit}/genre=1310/json`)
     .then(({ data }) => {
-      return data.feed.entry.map((entry: Entry) => ({
-        id: entry.id.attributes['im:id'],
-        image: entry['im:image'][2].label,
-        name: entry['im:name'].label,
-        author: entry['im:artist'].label,
-        summary: entry['summary'].label ?? '-',
-      }))
+      return {
+        podcasts: data.feed.entry.map((entry: Entry) => ({
+          id: entry.id.attributes['im:id'],
+          image: entry['im:image'][2].label,
+          name: entry['im:name'].label,
+          author: entry['im:artist'].label,
+          summary: entry['summary'].label ?? '-',
+        })),
+        timestamp: Date.now(),
+      }
     })
     .catch((error: AxiosError) => {
       throw new Error(error.message)

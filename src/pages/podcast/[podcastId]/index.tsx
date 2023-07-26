@@ -5,9 +5,8 @@ import { PodcastDetail } from 'src/modules/Podcasts/components/PodcastDetail'
 import { PodcastEpisodesCount } from 'src/modules/Podcasts/components/PodcastEpisodesCount'
 import { PodcastEpisodesTable } from 'src/modules/Podcasts/components/PodcastEpisodesTable'
 import { usePodcasts } from 'src/modules/Podcasts/hooks/usePodcasts'
-import { podcastDetailStore } from 'src/modules/Podcasts/store/podcastDetail'
+import { podcastDetailStore } from 'src/modules/Podcasts/store/podcastDetailStore'
 import { DefaultLayout } from 'src/modules/Shared/components/Layouts'
-
 
 export default function PodcastById() {
   const { isLoading } = podcastDetailStore()
