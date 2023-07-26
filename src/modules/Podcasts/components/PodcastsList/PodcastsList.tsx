@@ -10,9 +10,7 @@ export const PodcastsList = () => {
   const { retrieveAllPodcasts } = usePodcasts()
 
   useEffect(() => {
-    return () => {
-      retrieveAllPodcasts({ limit: '100' })
-    }
+    retrieveAllPodcasts({ limit: '100' })
   }, [])
 
   return (
