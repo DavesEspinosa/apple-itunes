@@ -1,9 +1,9 @@
 import { Chip, Grid, Stack, Typography } from '@mui/material'
-import { SearchInput } from '@modules/Shared/components/SearchInput/SearchInput'
 import { useEffect } from 'react'
-import { usePodcasts } from '@modules/Podcasts/hooks/usePodcasts'
 import { PodcastCard } from '../PodcastCard'
-import { persistedPodcastStore } from '@modules/Podcasts/store/persistedPodcastStore'
+import { SearchInput } from 'src/modules/Shared/components/SearchInput'
+import { usePodcasts } from '../../hooks/usePodcasts'
+import { persistedPodcastStore } from '../../store/persistedPodcastStore'
 
 export const PodcastsList = () => {
   const { setSearchPodcasts, filteredPodcastsList } = persistedPodcastStore()

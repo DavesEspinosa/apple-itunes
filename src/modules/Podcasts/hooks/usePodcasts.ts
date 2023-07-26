@@ -1,9 +1,9 @@
-import { getAllPodcasts } from '@context/AppleItunes/application/getAllPodcasts'
 import { persistedPodcastStore } from '../store/persistedPodcastStore'
 import { podcastRepositoryStore } from '../store/podcastRepositoryStore'
-import { isNotOutdated } from '@modules/Shared/utils/isNotOutdated'
 import { podcastDetailStore } from '../store/podcastDetail'
-import { getPodcastById } from '@context/AppleItunes/application/getPodcastById'
+import { getAllPodcasts } from 'src/context/AppleItunes/application/getAllPodcasts'
+import { getPodcastById } from 'src/context/AppleItunes/application/getPodcastById'
+import { isNotOutdated } from 'src/modules/Shared/utils/isNotOutdated'
 
 export const usePodcasts = () => {
   const { setPodcastsList } = persistedPodcastStore()

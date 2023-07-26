@@ -1,7 +1,7 @@
-import { Header } from '@modules/Podcasts/components/Header'
 import { Grid, Stack, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 import { ReactElement } from 'react'
+import { Header } from 'src/modules/Podcasts/components/Header'
 
 type DefaultLayoutProps = {
   children: ReactElement

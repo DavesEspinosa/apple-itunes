@@ -1,10 +1,10 @@
 import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
-import { ResponseEpisode } from '@context/AppleItunes/domain/ResponseApiPodcastById'
 import { useCallback } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { DateTime } from 'luxon'
 import { useRouter } from 'next/router'
-import { podcastDetailStore } from '@modules/Podcasts/store/podcastDetail'
+import { ResponseEpisode } from 'src/context/AppleItunes/domain/ResponseApiPodcastById'
+import { podcastDetailStore } from '../../store/podcastDetail'
 
 interface Column {
   id: 'trackName' | 'releaseDate' | 'trackTimeMillis'

@@ -3,9 +3,9 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
-import { Podcast } from '@context/AppleItunes/domain/Podcast'
 import { Stack } from '@mui/material'
 import { useRouter } from 'next/router'
+import { Podcast } from 'src/context/AppleItunes/domain/Podcast'
 
 export const PodcastCard = ({ podcast }: { podcast: Podcast }) => {
   const router = useRouter()

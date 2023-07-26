@@ -1,10 +1,10 @@
-import { ApiClient } from '@context/ApiClient'
 import axios, { AxiosError } from 'axios'
 import { Entry } from '../domain/ResponseEntry'
 import { PodcastRepository } from '../domain/PodcastRepository'
 import { parseString } from 'xml2js'
 import Parser from 'rss-parser'
 import { PodcastDetailFeedUrl } from '../domain/PodcastById'
+import { ApiClient } from 'src/context/ApiClient'
 
 const apiClient = ApiClient()
 

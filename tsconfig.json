@@ -22,10 +22,12 @@
     "jsx": "preserve",
     "target": "ES6",
     "baseUrl": ".",
-    "paths": {
-      "@modules/*": ["./src/modules/*"],
-      "@context/*": ["./src/context/*"]
-    },
+    // "paths": {
+    //   ".": ["."],
+    //   "@modules/*": ["modules/*"],
+    //   "@context/*": ["context/*"],
+    //   "@src/*": ["*"]
+    // },
     "incremental": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

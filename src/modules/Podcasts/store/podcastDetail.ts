@@ -1,5 +1,5 @@
-import { PodcastById } from '@context/AppleItunes/domain/PodcastById'
 import { produce } from 'immer'
+import { PodcastById } from 'src/context/AppleItunes/domain/PodcastById'
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 

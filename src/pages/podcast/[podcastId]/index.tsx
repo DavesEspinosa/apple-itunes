@@ -1,13 +1,13 @@
 import { Grid, Skeleton } from '@mui/material'
 import { useRouter } from 'next/router'
 import { ReactElement, useEffect } from 'react'
+import { PodcastDetail } from 'src/modules/Podcasts/components/PodcastDetail'
+import { PodcastEpisodesCount } from 'src/modules/Podcasts/components/PodcastEpisodesCount'
+import { PodcastEpisodesTable } from 'src/modules/Podcasts/components/PodcastEpisodesTable'
+import { usePodcasts } from 'src/modules/Podcasts/hooks/usePodcasts'
+import { podcastDetailStore } from 'src/modules/Podcasts/store/podcastDetail'
+import { DefaultLayout } from 'src/modules/Shared/components/Layouts'
 
-import { DefaultLayout } from '@modules/Shared/components/Layouts'
-import { PodcastDetail } from '@modules/Podcasts/components/PodcastDetail/PodcastDetail'
-import { podcastDetailStore } from '@modules/Podcasts/store/podcastDetail'
-import { usePodcasts } from '@modules/Podcasts/hooks/usePodcasts'
-import { PodcastEpisodesCount } from '@modules/Podcasts/components/PodcastEpisodesCount'
-import { PodcastEpisodesTable } from '@modules/Podcasts/components/PodcastEpisodesTable'
 
 export default function PodcastById() {
   const { isLoading } = podcastDetailStore()

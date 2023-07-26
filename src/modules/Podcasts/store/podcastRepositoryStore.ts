@@ -1,5 +1,5 @@
-import { PodcastRepository } from '@context/AppleItunes/domain/POdcastRepository'
-import { HttpAppleItunes } from '@context/AppleItunes/infrastructure/HttpAppleItunes'
+import { PodcastRepository } from 'src/context/AppleItunes/domain/PodcastRepository'
+import { HttpAppleItunes } from 'src/context/AppleItunes/infrastructure/HttpAppleItunes'
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 const repository = HttpAppleItunes()

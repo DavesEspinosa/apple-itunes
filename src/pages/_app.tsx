@@ -5,9 +5,9 @@ import { NextPage } from 'next'
 import { StyledEngineProvider } from '@mui/material/styles'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { useTheme } from '@emotion/react'
-import { HydrationZustand } from '@modules/Shared/hooks/useHydrationZustand'
 import { useRouter } from 'next/router'
-import { LoadingBarRoutes } from '@modules/Shared/components/LoadingBarRoutes'
+import { HydrationZustand } from 'src/modules/Shared/hooks/useHydrationZustand'
+import { LoadingBarRoutes } from 'src/modules/Shared/components/LoadingBarRoutes'
 
 export type NextPageWithLayout<P = unknown, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode

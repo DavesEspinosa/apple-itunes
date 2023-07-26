@@ -1,9 +1,9 @@
 import SearchIcon from '@mui/icons-material/Search'
 import { InputAdornment, TextField } from '@mui/material'
 import React, { ChangeEvent, useEffect, useState } from 'react'
+import { useDebounce } from '../../hooks/useDebounce'
+import { useIsMounted } from '../../hooks/useIsMounted'
 
-import { useDebounce } from '@modules/Shared/hooks/useDebounce'
-import { useIsMounted } from '@modules/Shared/hooks/useIsMounted'
 
 type SearchInputProps<T> = {
   delay?: number
