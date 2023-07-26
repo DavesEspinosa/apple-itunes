@@ -2,26 +2,26 @@ import { Grid, Skeleton } from '@mui/material'
 import { useRouter } from 'next/router'
 import { ReactElement, useEffect } from 'react'
 import { PodcastDetail } from 'src/modules/Podcasts/components/PodcastDetail'
-import { PodcastEpisodesCount } from 'src/modules/Podcasts/components/PodcastEpisodesCount'
-import { PodcastEpisodesTable } from 'src/modules/Podcasts/components/PodcastEpisodesTable'
+import { PodcastEpisodeDetail } from 'src/modules/Podcasts/components/PodcastEpisodeDetail'
 import { usePodcasts } from 'src/modules/Podcasts/hooks/usePodcasts'
 import { podcastDetailStore } from 'src/modules/Podcasts/store/podcastDetailStore'
 import { DefaultLayout } from 'src/modules/Shared/components/Layouts'
 
-export default function PodcastById() {
-  const { isLoading } = podcastDetailStore()
+export default function EpisodeById() {
+  const { isLoading, podcastDetail } = podcastDetailStore()
   const { getPodcastByIdAndEpisodeDetailHook } = usePodcasts()
   const router = useRouter()
-  const { podcastId } = router.query
 
+  const { podcastId, episodeId } = router.query
+  
   useEffect(() => {
-    if (!podcastId) {
+    if (!podcastId && !episodeId) {
       return
     }
-    getPodcastByIdAndEpisodeDetailHook({ id: podcastId as string, episodeId: null })
-  }, [podcastId])
+    getPodcastByIdAndEpisodeDetailHook({ id: podcastId as string, episodeId: episodeId as string })
+  }, [podcastId, episodeId])
 
-  return isLoading ? (
+  return isLoading && !podcastDetail ? (
     <Grid id="container" container columnSpacing={2} columns={12} alignItems="stretch">
       <Grid item md={4}>
         <Skeleton variant="rectangular" width={320} height={440} />
@@ -33,16 +33,15 @@ export default function PodcastById() {
   ) : (
     <Grid id="container" container columnSpacing={2} columns={12} alignItems="stretch">
       <Grid item md={4}>
-        <PodcastDetail />
+        <PodcastDetail isFromEpisode={true} />
       </Grid>
       <Grid item md={8}>
-        <PodcastEpisodesCount />
-        <PodcastEpisodesTable />
+        <PodcastEpisodeDetail />
       </Grid>
     </Grid>
   )
 }
 
-PodcastById.getLayout = function getLayout(page: ReactElement) {
+EpisodeById.getLayout = function getLayout(page: ReactElement) {
   return <DefaultLayout title="Podcaster">{page}</DefaultLayout>
 }

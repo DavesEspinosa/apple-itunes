@@ -31,6 +31,7 @@ export const PodcastEpisodesTable = () => {
       label: 'Date',
       minWidth: 170,
       align: 'right',
+      format: (value: string | number) => DateTime.fromISO(value as string, { zone: 'UTC' }).toFormat('dd/MM/yyyy'),
     },
     {
       id: 'trackTimeMillis',
@@ -61,7 +62,6 @@ export const PodcastEpisodesTable = () => {
                   <TableRow hover role="checkbox" tabIndex={-1} key={uuidv4()}>
                     {columns.map((column) => {
                       let value = episode[column.id]
-
                       return (
                         <TableCell
                           sx={{ cursor: 'pointer' }}
@@ -69,7 +69,7 @@ export const PodcastEpisodesTable = () => {
                           key={column.id}
                           align={column.align}
                         >
-                          {column.format && typeof value === 'number' ? column.format(value) : value}
+                          {column.format ? column.format(value as number) : value}
                         </TableCell>
                       )
                     })}

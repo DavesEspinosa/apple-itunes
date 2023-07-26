@@ -9,6 +9,10 @@ export const PodcastDetailFeedUrlSchema = z.object({
 export const PodcastByIdSchema = PodcastDetailFeedUrlSchema.extend({
   podcast: z.lazy(() => DetailPodcastSchema),
   episodes: z.lazy(() => z.array(EpisodeSchema)),
+  episodeDetail: z
+    .lazy(() => EpisodeSchema)
+    .nullable()
+    .optional(),
   timestamp: z.number(),
 })
 
