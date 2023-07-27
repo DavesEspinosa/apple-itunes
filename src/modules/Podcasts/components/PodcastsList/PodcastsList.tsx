@@ -1,4 +1,4 @@
-import { Chip, Grid, Stack, Typography } from '@mui/material'
+import { Box, Chip, Grid, Stack, Typography } from '@mui/material'
 import { useEffect } from 'react'
 import { PodcastCard } from '../PodcastCard'
 import { SearchInput } from 'src/modules/Shared/components/SearchInput'
@@ -14,10 +14,10 @@ export const PodcastsList = () => {
   }, [])
 
   return (
-    <Grid id="container" container gap={2} columns={14} justifyContent={'flex-end'}>
-      <Grid item>
+    <>
+      <Grid xs={12} item>
         {filteredPodcastsList && (
-          <Stack direction="row" spacing={1} alignItems={'center'}>
+          <Stack direction="row" spacing={1} justifyContent={'flex-end'} alignItems={'center'}>
             <Chip
               label={
                 <Typography variant="button" fontWeight="bold" component="div">
@@ -31,13 +31,25 @@ export const PodcastsList = () => {
           </Stack>
         )}
       </Grid>
-      <Grid id="container" container gap={2} columns={14} justifyContent={'center'}>
-        {filteredPodcastsList?.map((podcast) => (
-          <Grid key={podcast.id} item xs={3}>
-            <PodcastCard podcast={podcast} />
-          </Grid>
-        ))}
+      <Grid
+        sx={{
+          p: 2,
+          borderRadius: 2,
+          height: '100%',
+          overflow: 'auto',
+        }}
+        justifyContent={'center'}
+        xs={12}
+        item
+      >
+        <Grid id="container" container gap={2} columns={14} justifyContent={'center'}>
+          {filteredPodcastsList?.map((podcast) => (
+            <Grid key={podcast.id} item xs={3}>
+              <PodcastCard podcast={podcast} />
+            </Grid>
+          ))}
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   )
 }

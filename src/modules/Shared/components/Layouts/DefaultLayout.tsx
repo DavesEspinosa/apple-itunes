@@ -1,7 +1,9 @@
 import { Grid, Stack, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
-import { ReactElement } from 'react'
+import { ReactElement, useEffect } from 'react'
 import { Header } from 'src/modules/Podcasts/components/Header'
+import * as useWindowSize from '../../hooks/useWindowSize'
+import { globalStore } from '../../store/globalStore'
 
 type DefaultLayoutProps = {
   children: ReactElement
@@ -12,6 +14,13 @@ type DefaultLayoutProps = {
 }
 export const DefaultLayout = ({ children, title, pageTitle, headerRightContent, breadcrumbs }: DefaultLayoutProps) => {
   const router = useRouter()
+  const { setHeight } = globalStore()
+  const size = useWindowSize.useWindowSize('container')
+
+  useEffect(() => {
+    if (size.height === 0) return
+    setHeight(size.height)
+  }, [setHeight, size.height])
 
   const header = (
     <Grid container alignItems="start" justifyContent="space-between">
